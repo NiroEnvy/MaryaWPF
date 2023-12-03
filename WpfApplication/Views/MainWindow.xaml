@@ -1,0 +1,25 @@
+﻿<reactiveUi:ReactiveWindow x:TypeArguments="viewModels:MainWindowViewModel"
+                           x:Class="WpfApplication.Views.MainWindow"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                           xmlns:views="clr-namespace:WpfApplication.Views"
+                           xmlns:reactiveUi="http://reactiveui.net"
+                           xmlns:viewModels="clr-namespace:WpfApplication.ViewModels"
+                           d:DataContext="{d:DesignInstance Type=viewModels:MainWindowViewModel, IsDesignTimeCreatable=False}"
+                           mc:Ignorable="d"
+                           WindowStartupLocation="CenterScreen"
+                           Title="MainWindow" ResizeMode="CanResize" SizeToContent="Width" MaxHeight="500">
+    <StackPanel Orientation="Horizontal">
+        <views:MeasurementSchedulerView DataContext="{Binding MeasurementSchedulerVm, Mode=TwoWay}" Margin="0,0,20,0" />
+        <StackPanel Orientation="Vertical">
+            <views:CustomCalendar DataContext="{Binding CalendarViewModel, Mode=TwoWay}"
+                                  Visibility="{Binding DataContext.CustomCalendarVisibility, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                  MinHeight="400" />
+
+            <Button Content="Submit" Command="{Binding SubmitCommand}" Width="100" Height="50" />
+        </StackPanel>
+
+    </StackPanel>
+</reactiveUi:ReactiveWindow>
